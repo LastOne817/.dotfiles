@@ -1,0 +1,12 @@
+[core]
+	editor = vim
+	pager = less
+[user]
+	name = LastOne817
+	email = lastone817@naver.com
+[alias]
+	lg = log --pretty=format:\"%C(yellow)%h %C(green)%s %C(blue)%cr %C(red)%cn %C(auto)%d%Creset\" --graph --decorate --branches
+[push]
+	default = simple
+[merge]
+	tool = vimdiff
