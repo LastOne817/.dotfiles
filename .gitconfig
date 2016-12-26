@@ -1,6 +1,6 @@
 [core]
 	editor = vim
-	pager = less
+	pager = less -XF
 [user]
 	name = LastOne817
 	email = lastone817@naver.com
