@@ -5,10 +5,10 @@ set cindent
 set smartindent
 set nobackup
 set ruler
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set expandtab
-set softtabstop=4
+set softtabstop=2
 set ignorecase
 set hlsearch
 set incsearch
@@ -258,22 +258,21 @@ nmap <F9> :call ToggleErrors()<CR>
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
-Plugin 'taglist.vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'The-NERD-tree'
-Plugin 'code_complete'
-Plugin 'Syntastic'
-Plugin 'Indent-Guides'
-Plugin 'mattn/emmet-vim'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'wting/rust.vim'
-Plugin 'SingleCompile'
-Plugin 'fatih/vim-go'
-call vundle#end()
+call plug#begin('~/.vim/plugged')
+Plug 'gmarik/Vundle.vim'
+Plug 'taglist.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'The-NERD-tree'
+Plug 'code_complete'
+Plug 'Syntastic'
+Plug 'Indent-Guides'
+Plug 'mattn/emmet-vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'wting/rust.vim'
+Plug 'SingleCompile'
+Plug 'fatih/vim-go'
+call plug#end()
 filetype plugin indent on
 
 let g:indent_guides_auto_colors = 0
