@@ -249,32 +249,49 @@ hi Constant ctermfg=196 ctermbg=black
 hi PreProc  ctermfg=44
 hi Search ctermbg=red
 
-nmap <F7> :NERDTree<CR>
-nmap <F8> :Tlist<CR>
-let Tlist_Use_Right_Window = 1
-nmap <F9> :call ToggleErrors()<CR>
-
-" Vundle
-set nocompatible
-filetype off
-
 call plug#begin('~/.vim/plugged')
-Plug 'gmarik/Vundle.vim'
-Plug 'taglist.vim'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'The-NERD-tree'
-Plug 'code_complete'
-Plug 'Syntastic'
-Plug 'Indent-Guides'
+Plug 'vim-syntastic/syntastic'
 Plug 'mattn/emmet-vim'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'posva/vim-vue'
 Plug 'airblade/vim-gitgutter'
-Plug 'wting/rust.vim'
-Plug 'SingleCompile'
-Plug 'fatih/vim-go'
+Plug 'elixir-lang/vim-elixir'
 call plug#end()
+
 filetype plugin indent on
 
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+highlight SyntasticErrorSign guifg=white guibg=red
+highlight SyntasticErrorLine guibg=#2f0000
+
+function! ToggleErrors()
+	let old_last_winnr = winnr('$')
+	lclose
+	if old_last_winnr == winnr('$')
+    " Nothing was closed, open syntastic error location panel
+    Errors
+	endif
+endfunction
+nmap <F9> :call ToggleErrors()<CR>
+
+" Airline
+set laststatus=2
+let g:airline_theme='badwolf'
+
+let g:airline#extensions#syntastic#enabled = 1
+
+" Indent Guide
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_guide_size = 1
 let g:indent_guides_start_level = 2
@@ -282,62 +299,12 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=244 guibg=red
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=240 guibg=red
 autocmd VimEnter,Colorscheme * :IndentGuidesEnable
 
-" 자동 주석 제거
+" Auto comment disable
 autocmd FileType * setlocal formatoptions-=ro
 
-" airline 설정
-set laststatus=2
-set t_Co=256
-let g:airline_theme = 'badwolf'
-
+" Auto View Save
 if &diff
 else
-    au BufWinLeave *.* mkview
-    au BufWinEnter *.* silent loadview
+  au BufWinLeave *.* mkview
+  au BufWinEnter *.* silent loadview
 endif
-
-au BufNewFile,BufRead *.glsl,*.fragmentshader,*.vertexshader setf glsl
-
-" Syntastic
-let g:syntastic_check_on_open = 1
-let g:syntastic_enable_signs = 1
-let g:syntastic_cpp_check_header = 1
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-highlight SyntasticErrorSign guifg=white guibg=red
-highlight SyntasticErrorLine guibg=#2f0000
-
-let g:syntastic_c_compiler = 'gcc'
-
-let g:syntastic_cpp_compiler = 'g++'
-let g:syntastic_cpp_compiler_options = ' -std=c++11'
-
-let g:loaded_syntastic_cpp11_gcc_checker = 1
-let g:syntastic_cpp11_compiler = executable('g++') ? 'g++' : 'clang++'
-let g:syntastic_cpp_include_dirs = [ '../external/glfw-3.0.3/include/GLFW/', 'external/glfw-3.0.3/include/GLFW/', 'external/glm-0.9.4.0/', '../external/glm-0.9.4.0/', 'external/glew-1.9.0/include/' , '../external/glew-1.9.0/include/' ]
-
-function! ToggleErrors()
-	let old_last_winnr = winnr('$')
-	lclose
-	if old_last_winnr == winnr('$')
-        " Nothing was closed, open syntastic error location panel
-	    Errors
-	endif
-endfunction
-
-au BufWinEnter *.cpp,*h syn keyword cppType shared_ptr unordered_map map vector deque queue list
-
-au BufWinEnter *.cpp,*.c,*h set et
-au BufWinEnter *.cpp,*.c,*h retab
-
-let g:html_indent_inctags = "body,head,tbody"
-
-let g:airline#extensions#syntastic#enabled = 1
-
-nmap <F10> :SCCompileRun<cr>
-let g:SingleCompile_autowrite = 0
-
-au BufWinEnter *.bsv set filetype=bsv
