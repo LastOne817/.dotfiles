@@ -3,6 +3,8 @@
 # Install Plugins
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 cp .vimrc $HOME/.vimrc
+mkdir -p $HOME/.vim/colors
+cp vividchalk.vim $HOME/.vim/colors
 vim +PlugInstall
 
 # zsh install

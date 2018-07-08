@@ -2,8 +2,8 @@
 	editor = vim
 	pager = less -XF
 [user]
-	name = LastOne817
-	email = lastone817@naver.com
+	name = DongJin Shin
+	email = dongjin.shin.00@gmail.com
 [alias]
 	lg = log --pretty=format:\"%C(yellow)%h %C(green)%s %C(blue)%cr %C(red)%cn %C(auto)%d%Creset\" --graph --decorate --branches
 [push]
