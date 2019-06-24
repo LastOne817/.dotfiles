@@ -13,7 +13,7 @@ sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install
 cp .zshrc $HOME/.zshrc
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 git clone git://github.com/yonchu/zsh-vcs-prompt.git ~/.oh-my-zsh/zsh-vcs-prompt
-chsh -s $(which zsh)
+# chsh -s $(which zsh)
 
 # git config
 cp .gitconfig $HOME/.gitconfig
@@ -26,4 +26,6 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
 echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
-echo 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.zshrc
+echo 'if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi' >> ~/.zshrc
